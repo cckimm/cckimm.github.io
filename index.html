@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chungyool Kim · Accounting, Cal State Fullerton</title>
+<meta name="description" content="Chungyool Kim, Assistant Professor of Accounting at California State University, Fullerton. Research on corporate disclosure; ACCT 302 Cost Accounting course resources.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='12' fill='%2300244E'/><text x='50%' y='58%' font-family='Georgia,serif' font-size='30' fill='%23FF7900' text-anchor='middle' dominant-baseline='middle'>CK</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,400&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+/* =========================================================
+   THEME — "Disclosures"
+   A nod to corporate filings: section numbers read like
+   10-K items, totals get the accountant's double rule.
+   ========================================================= */
+:root{
+  --paper:#F7F4EC; --paper-2:#EFEADD; --card:#FFFDF8;
+  --ink:#14213D; --ink-2:#3F4A63; --ink-3:#6B7389;
+  --rule:#D9D2C1; --grid:rgba(20,33,61,.045);
+  --navy:#00244E; --orange:#FF7900; --orange-ink:#B85400;
+  --green:#2F6B4F; --amber:#8A5A00; --blue:#24538F;
+  --serif:'Fraunces',Georgia,'Times New Roman',serif;
+  --sans:'IBM Plex Sans',system-ui,-apple-system,'Segoe UI',sans-serif;
+  --mono:'IBM Plex Mono',ui-monospace,Menlo,Consolas,monospace;
+  --radius:14px; --max:1120px;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --paper:#0E1424; --paper-2:#141B2E; --card:#161E33;
+    --ink:#ECE8DD; --ink-2:#BFC4D2; --ink-3:#8C93A8;
+    --rule:#2A3350; --grid:rgba(236,232,221,.035);
+    --navy:#9DB8E8; --orange:#FF8E2B; --orange-ink:#FFA555;
+    --green:#7FC8A2; --amber:#F2C46B; --blue:#8DB4F0;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#0E1424; --paper-2:#141B2E; --card:#161E33;
+  --ink:#ECE8DD; --ink-2:#BFC4D2; --ink-3:#8C93A8;
+  --rule:#2A3350; --grid:rgba(236,232,221,.035);
+  --navy:#9DB8E8; --orange:#FF8E2B; --orange-ink:#FFA555;
+  --green:#7FC8A2; --amber:#F2C46B; --blue:#8DB4F0;
+}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:84px}
+body{
+  margin:0;background:var(--paper);color:var(--ink);
+  font-family:var(--sans);font-size:17px;line-height:1.65;
+  background-image:
+    linear-gradient(var(--grid) 1px,transparent 1px),
+    linear-gradient(90deg,var(--grid) 1px,transparent 1px);
+  background-size:28px 28px;
+  -webkit-font-smoothing:antialiased;
+}
+a{color:inherit}
+img{max-width:100%;display:block}
+.wrap{max-width:var(--max);margin:0 auto;padding:0 24px}
+.mono{font-family:var(--mono)}
+.skip{position:absolute;left:-999px}.skip:focus{left:16px;top:12px;z-index:99;background:var(--card);padding:8px 12px;border-radius:8px}
+:focus-visible{outline:2px solid var(--orange);outline-offset:3px;border-radius:6px}
+
+/* ---------- Nav ---------- */
+header.nav{
+  position:sticky;top:0;z-index:50;
+  background:color-mix(in srgb,var(--paper) 86%,transparent);
+  backdrop-filter:saturate(1.4) blur(10px);-webkit-backdrop-filter:saturate(1.4) blur(10px);
+  border-bottom:1px solid var(--rule);
+}
+.nav .wrap{display:flex;align-items:center;justify-content:space-between;height:66px;gap:16px}
+.brand{display:flex;align-items:center;gap:10px;white-space:nowrap;text-decoration:none;font-family:var(--serif);font-size:20px;font-weight:600;letter-spacing:-.01em}
+/* CSUF wordmark — official files only (brand.fullerton.edu); never recolor or stretch */
+.brandset{display:flex;align-items:center;gap:16px;min-width:0}
+.csuf{display:flex;align-items:center;padding:6px 0;flex-shrink:0}
+.csuf img{height:34px;width:auto}
+/* dark mode: official full-color wordmark on a light plate (keeps the navy legible) */
+:root[data-theme="dark"] .logo-color{background:#F7F4EC;padding:5px 9px;border-radius:7px;box-sizing:content-box}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .logo-color{background:#F7F4EC;padding:5px 9px;border-radius:7px;box-sizing:content-box}}
+.brandset .divider{width:1px;height:30px;background:var(--rule)}
+.nologo .csuf,.nologo .divider{display:none}
+@media (max-width:520px){.csuf img{height:24px}.brand{font-size:16px}.brandset{gap:10px}.nav .wrap{padding:0 14px}.theme-btn{margin-left:4px}}
+@media (max-width:600px){html:not(.nologo) .brandset .divider,html:not(.nologo) .brandset .brand{display:none}}
+@media (max-width:400px){.csuf img{height:22px}.brand{font-size:15px}}
+.brand .mark{width:30px;height:30px;border-radius:8px;background:var(--navy);color:var(--orange);display:grid;place-items:center;font-size:14px;font-family:var(--serif)}
+:root[data-theme="dark"] .brand .mark{color:#0E1424;background:var(--orange)}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .brand .mark{color:#0E1424;background:var(--orange)}}
+.brand .mark{display:none}
+.nologo .brand .mark{display:grid}
+.nav nav{display:flex;align-items:center;gap:4px}
+.nav nav a{text-decoration:none;font-size:15px;color:var(--ink-2);padding:8px 12px;border-radius:8px;transition:background .2s,color .2s}
+.nav nav a:hover{background:var(--paper-2);color:var(--ink)}
+.nav nav a.cta{background:var(--navy);color:var(--paper);font-weight:500}
+:root[data-theme="dark"] .nav nav a.cta{background:var(--orange);color:#0E1424}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .nav nav a.cta{background:var(--orange);color:#0E1424}}
+.nav nav a.cta:hover{filter:brightness(1.1)}
+.theme-btn{border:1px solid var(--rule);background:transparent;color:var(--ink-2);width:36px;height:36px;border-radius:9px;cursor:pointer;display:grid;place-items:center;margin-left:6px}
+.menu-btn{display:none}
+@media (max-width:820px){
+  .nav nav{position:absolute;top:66px;left:0;right:0;flex-direction:column;align-items:stretch;padding:10px 16px 16px;background:var(--paper);border-bottom:1px solid var(--rule);display:none}
+  .nav nav.open{display:flex}
+  .nav nav a{padding:12px}
+  .menu-btn{display:grid}
+  .theme-btn.in-menu{display:none}
+}
+
+/* ---------- Hero ---------- */
+.hero{padding:72px 0 40px}
+.hero .wrap{display:grid;grid-template-columns:1.25fr .9fr;gap:56px;align-items:center}
+.eyebrow{font-family:var(--mono);font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--orange-ink);display:flex;align-items:center;gap:10px}
+.eyebrow::before{content:"";width:22px;height:2px;background:var(--orange)}
+h1{font-family:var(--serif);font-weight:400;font-size:clamp(40px,5.6vw,68px);line-height:1.05;letter-spacing:-.025em;margin:18px 0 22px}
+h1 em{font-style:italic;color:var(--orange-ink)}
+.lede{font-size:clamp(18px,2.1vw,21px);color:var(--ink-2);max-width:44ch;margin:0 0 30px}
+.lede strong{color:var(--ink);font-weight:500}
+.btns{display:flex;flex-wrap:wrap;gap:12px}
+.btn{display:inline-flex;align-items:center;gap:10px;text-decoration:none;font-weight:500;font-size:15.5px;padding:13px 20px;border-radius:11px;border:1px solid var(--ink);transition:transform .2s,box-shadow .2s,background .2s}
+.btn.primary{background:var(--ink);color:var(--paper)}
+.btn.ghost{background:transparent}
+.btn:hover{transform:translateY(-2px);box-shadow:0 8px 20px -10px rgba(0,0,0,.45)}
+.btn .arr{transition:transform .2s}.btn:hover .arr{transform:translateX(3px)}
+.btn[aria-disabled="true"]{opacity:.5;pointer-events:none}
+
+/* filing-header card */
+.filing{
+  background:var(--card);border:1px solid var(--rule);border-radius:var(--radius);
+  box-shadow:0 30px 60px -40px rgba(20,33,61,.55);overflow:hidden;position:relative;
+}
+.filing .photo{aspect-ratio:4/4.2;background:linear-gradient(135deg,#00244E,#0B3A73);position:relative;display:grid;place-items:center;overflow:hidden}
+.filing .photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 18%;z-index:1}
+.filing .photo .stamp{z-index:2}
+.filing .photo .mono-ini{font-family:var(--serif);font-size:96px;color:var(--orange);font-style:italic;letter-spacing:-.04em}
+.filing .stamp{position:absolute;top:14px;right:14px;font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#fff;border:1.5px solid rgba(255,255,255,.75);padding:4px 8px;border-radius:4px;transform:rotate(3deg);background:rgba(0,0,0,.18)}
+.filing dl{margin:0;padding:18px 22px 20px;display:grid;grid-template-columns:auto 1fr;gap:7px 18px;font-size:14px}
+.filing dt{font-family:var(--mono);font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3);padding-top:2px}
+.filing dd{margin:0;color:var(--ink)}
+.filing .bar{border-top:1px dashed var(--rule);padding:10px 22px;font-family:var(--mono);font-size:11.5px;color:var(--ink-3);display:flex;justify-content:space-between}
+
+@media (max-width:900px){.hero .wrap{grid-template-columns:1fr;gap:40px}.hero{padding-top:48px}.filing{max-width:460px}}
+
+/* ---------- Sections ---------- */
+section.block{padding:88px 0 24px}
+.sec-head{display:grid;grid-template-columns:200px 1fr;gap:24px;align-items:end;margin-bottom:40px}
+.sec-head .item{font-family:var(--mono);font-size:12.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3);padding-bottom:10px}
+.sec-head h2{font-family:var(--serif);font-weight:400;font-size:clamp(34px,4.6vw,52px);letter-spacing:-.02em;line-height:1.05;margin:0;padding-bottom:16px;
+  border-bottom:4px double var(--ink)}  /* the accountant's double rule */
+.sec-head p{grid-column:2;margin:-14px 0 0;color:var(--ink-2);max-width:62ch}
+@media (max-width:720px){.sec-head{grid-template-columns:1fr;gap:4px}.sec-head .item{padding:0}.sec-head p{grid-column:1;margin-top:12px}}
+
+/* ---------- Research ---------- */
+.about-grid{display:grid;grid-template-columns:200px 1fr;gap:24px}
+.about-grid .body{max-width:68ch;font-size:18.5px;color:var(--ink-2)}
+.about-grid .body p:first-child::first-letter{font-family:var(--serif);float:left;font-size:4.1em;line-height:.8;padding:6px 10px 0 0;color:var(--orange-ink)}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+.chip{font-family:var(--mono);font-size:12.5px;padding:5px 11px;border:1px solid var(--rule);border-radius:999px;color:var(--ink-2);background:var(--card)}
+@media (max-width:720px){.about-grid{grid-template-columns:1fr}}
+
+.papers{display:grid;gap:14px}
+.paper{display:grid;grid-template-columns:200px 1fr;gap:24px;padding:26px 0;border-top:1px solid var(--rule)}
+.paper:last-child{border-bottom:1px solid var(--rule)}
+.paper .meta{display:flex;flex-direction:column;gap:10px;align-items:flex-start}
+.paper .num{font-family:var(--mono);font-size:12.5px;color:var(--ink-3);letter-spacing:.08em}
+.status{font-family:var(--mono);font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;padding:4px 9px;border-radius:6px;border:1px solid currentColor;line-height:1.35}
+.status.pub{color:#fff;background:var(--navy);border-color:var(--navy)}
+.paper .plink{display:inline-block;margin-top:8px;margin-right:14px;font-size:14.5px;font-weight:500;color:var(--orange-ink);text-decoration:none}
+.paper .plink:hover{text-decoration:underline}
+.status.rr{color:var(--green)}.status.ur{color:var(--blue)}.status.prep{color:var(--amber)}.status.wip{color:var(--ink-3)}
+.paper h3{font-family:var(--serif);font-weight:400;font-size:clamp(22px,2.6vw,28px);line-height:1.2;letter-spacing:-.01em;margin:0 0 8px}
+.paper .authors{color:var(--ink-2);font-size:15.5px;margin:0 0 4px}
+.paper .venue{font-size:15px;color:var(--ink-3);margin:0}
+.paper details{margin-top:12px}
+.paper summary{cursor:pointer;font-size:14.5px;font-weight:500;color:var(--orange-ink);list-style:none;display:inline-flex;align-items:center;gap:6px}
+.paper summary::-webkit-details-marker{display:none}
+.paper summary::before{content:"+";font-family:var(--mono);display:inline-block;width:14px;transition:transform .2s}
+.paper details[open] summary::before{content:"–"}
+.paper details .more{margin-top:10px;color:var(--ink-2);font-size:16px;max-width:66ch}
+.paper details .more p{margin:0 0 8px}
+@media (max-width:720px){.paper{grid-template-columns:1fr;gap:10px}.paper .meta{flex-direction:row;align-items:center}}
+
+/* ---------- Teaching ---------- */
+.course{display:grid;grid-template-columns:1fr 1.15fr;gap:28px;margin-bottom:34px}
+.course-card{background:var(--card);border:1px solid var(--rule);border-radius:var(--radius);padding:28px}
+.course-card .code{font-family:var(--mono);font-size:13px;color:var(--orange-ink);letter-spacing:.08em}
+.course-card h3{font-family:var(--serif);font-weight:400;font-size:32px;margin:6px 0 10px;letter-spacing:-.01em}
+.course-card p{color:var(--ink-2);margin:0 0 18px}
+.widgets-note{font-size:15px;color:var(--ink-2);background:var(--paper-2);border-left:3px solid var(--orange);padding:12px 14px;border-radius:0 8px 8px 0;margin:0 0 20px}
+.widgets-note b{color:var(--ink);font-weight:600}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.stat{background:var(--card);border:1px solid var(--rule);border-radius:var(--radius);padding:20px}
+.stat .v{font-family:var(--serif);font-size:44px;line-height:1;letter-spacing:-.02em}
+.stat .v small{font-size:18px;color:var(--ink-3)}
+.stat .l{font-family:var(--mono);font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3);margin-top:10px}
+.stats .wide{grid-column:1 / -1;display:flex;align-items:center;justify-content:space-between;gap:16px}
+.spark{width:100%;max-width:260px;height:48px}
+@media (max-width:860px){.course{grid-template-columns:minmax(0,1fr)}}
+.course>*,.stats>*{min-width:0}
+.course{align-items:start}
+.stats{align-content:start}
+.ledger .term{white-space:nowrap}
+.stats{grid-template-columns:repeat(3,minmax(0,1fr))}
+@media (max-width:400px){.stat{padding:16px}.stat .v{font-size:36px}.course-card{padding:22px}}
+
+.ledger-wrap{background:var(--card);border:1px solid var(--rule);border-radius:var(--radius);overflow:hidden}
+.ledger-top{display:flex;justify-content:space-between;align-items:center;padding:16px 22px;border-bottom:1px solid var(--rule);gap:12px;flex-wrap:wrap}
+.ledger-top h4{margin:0;font-family:var(--serif);font-weight:400;font-size:22px}
+.ledger-top .hint{font-size:13.5px;color:var(--ink-3)}
+table.ledger{width:100%;border-collapse:collapse;font-size:15.5px}
+.ledger th{font-family:var(--mono);font-weight:500;font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3);text-align:left;padding:12px 22px;border-bottom:1px solid var(--rule);background:var(--paper-2)}
+.ledger td{padding:15px 22px;border-bottom:1px solid var(--rule);vertical-align:middle}
+.ledger tr:hover td{background:color-mix(in srgb,var(--paper-2) 55%,transparent)}
+.ledger .term{font-weight:500}
+.ledger .now{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:#fff;background:var(--orange);padding:2px 7px;border-radius:5px;margin-left:8px;vertical-align:2px}
+:root[data-theme="dark"] .ledger .now{color:#0E1424}
+.ledger .num{font-family:var(--mono);text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+.ledger th.num{text-align:right}
+.ledger tfoot td{border-bottom:none;font-weight:500}
+.ledger tfoot .num span{border-bottom:3px double var(--ink);padding-bottom:2px}
+.link-pill{display:inline-flex;align-items:center;gap:6px;font-size:14px;font-weight:500;text-decoration:none;padding:6px 11px;border-radius:8px;border:1px solid var(--rule);background:var(--paper);white-space:nowrap;transition:border-color .2s,color .2s}
+a.link-pill:hover{border-color:var(--orange);color:var(--orange-ink)}
+.pills{display:flex;gap:6px;flex-wrap:wrap}
+.link-pill.off{color:var(--ink-3);border-style:dashed;background:transparent}
+.link-pill svg{width:14px;height:14px}
+@media (max-width:720px){
+  .ledger thead{display:none}
+  .ledger, .ledger tbody, .ledger tr, .ledger td{display:block;width:100%}
+  .ledger tr{padding:14px 18px;border-bottom:1px solid var(--rule)}
+  .ledger td{border:none;padding:4px 0;display:flex;justify-content:space-between;align-items:center;gap:12px}
+  .ledger td::before{content:attr(data-label);font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3)}
+  .ledger td.term::before{content:none}
+  .ledger .num{text-align:left}
+  .ledger tfoot tr{padding:14px 18px}
+}
+
+/* ---------- CV ---------- */
+.cv{display:grid;grid-template-columns:1fr 1fr;gap:28px;align-items:stretch}
+.cv-card{background:var(--card);border:1px solid var(--rule);border-radius:var(--radius);padding:32px;display:flex;flex-direction:column;gap:14px}
+.cv-card h3{font-family:var(--serif);font-weight:400;font-size:30px;margin:0;letter-spacing:-.01em}
+.cv-card p{margin:0;color:var(--ink-2)}
+.sync{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:12px;color:var(--green)}
+.sync i{width:8px;height:8px;border-radius:50%;background:var(--green);box-shadow:0 0 0 4px color-mix(in srgb,var(--green) 22%,transparent)}
+.cv-frame{border:1px solid var(--rule);border-radius:var(--radius);overflow:hidden;background:var(--paper-2);min-height:420px;display:grid;place-items:center;position:relative}
+.cv-frame iframe{width:100%;height:100%;min-height:560px;border:0;background:#fff}
+.cv-frame .ph{text-align:center;padding:30px;color:var(--ink-3);font-size:15px;max-width:34ch}
+.cv-frame .ph .doc{width:84px;height:108px;margin:0 auto 16px;border:1.5px solid var(--rule);border-radius:6px;background:var(--card);position:relative}
+.cv-frame .ph .doc::before{content:"";position:absolute;inset:18px 14px auto;height:44px;background:repeating-linear-gradient(var(--rule) 0 2px,transparent 2px 9px)}
+@media (max-width:860px){.cv{grid-template-columns:1fr}}
+
+/* ---------- Footer ---------- */
+footer{margin-top:96px;border-top:4px double var(--ink);padding:36px 0 48px}
+footer .wrap{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:28px}
+footer h5{font-family:var(--mono);font-weight:500;font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3);margin:0 0 10px}
+footer p,footer a{font-size:15px;color:var(--ink-2);margin:0 0 6px;display:block;text-decoration:none}
+footer a:hover{color:var(--orange-ink)}
+footer .flogo{display:block;margin:0 0 18px;padding:4px 0}
+footer .flogo img{height:38px;width:auto}
+.nologo footer .flogo{display:none}
+footer .sig{font-family:var(--serif);font-size:26px;color:var(--ink);margin-bottom:6px}
+footer .fine{grid-column:1/-1;font-family:var(--mono);font-size:12px;color:var(--ink-3);border-top:1px solid var(--rule);padding-top:16px;margin-top:8px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
+@media (max-width:720px){footer .wrap{grid-template-columns:1fr}}
+
+/* reveal on scroll */
+.reveal{opacity:0;transform:translateY(14px);transition:opacity .7s ease,transform .7s ease}
+.reveal.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<!-- ======================= NAV ======================= -->
+<header class="nav">
+  <div class="wrap">
+    <div class="brandset">
+      <!-- Official CSUF wordmark: csuf-wordmark.png (full color, transparent background) -->
+      <a class="csuf" href="https://www.fullerton.edu/" target="_blank" rel="noopener" aria-label="California State University, Fullerton">
+        <img class="logo-color" src="csuf-wordmark.png" alt="Cal State Fullerton" onerror="document.documentElement.classList.add('nologo')">
+      </a>
+      <span class="divider" aria-hidden="true"></span>
+      <a class="brand" href="#top"><span class="mark">CK</span>Chungyool Kim</a>
+    </div>
+    <div style="display:flex;align-items:center">
+      <nav id="menu" aria-label="Main">
+        <a href="#research">Research</a>
+        <a href="#teaching">Teaching</a>
+        <a href="#cv">CV</a>
+        <a href="#contact">Contact</a>
+        <a class="cta" href="#teaching">Course Widgets</a>
+      </nav>
+      <button class="theme-btn" id="themeBtn" aria-label="Toggle dark mode" title="Toggle dark mode">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+      </button>
+      <button class="theme-btn menu-btn" id="menuBtn" aria-label="Open menu" aria-expanded="false" aria-controls="menu">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+<!-- ======================= HERO ======================= -->
+<section class="hero" id="top">
+  <div class="wrap">
+    <div>
+      <div class="eyebrow">Assistant Professor of Accounting · Cal State Fullerton</div>
+      <h1>Welcome to <em>Chungyool Kim's</em> personal website.</h1>
+      <p class="lede">I study corporate disclosure — from 8-Ks and press releases to executives' social media — and teach <strong>Cost Accounting (ACCT 302)</strong> in the College of Business and Economics. I'm also an <strong>AI enthusiast</strong> who loves finding innovative ways to bring AI into both my research and my teaching.</p>
+      <div class="btns">
+        <a class="btn primary" href="#teaching">Teaching &amp; course widgets <span class="arr">→</span></a>
+        <a class="btn ghost" href="#research">See my research <span class="arr">→</span></a>
+      </div>
+    </div>
+
+    <aside class="filing reveal" aria-label="Profile summary">
+      <div class="photo">
+        <!-- Add a file named photo.jpg next to this page to show your headshot here. -->
+        <img src="photo.jpg" alt="Portrait of Chungyool Kim" onerror="this.remove()">
+        <span class="mono-ini" aria-hidden="true">CK</span>
+      </div>
+      <dl>
+        <dt>Name</dt><dd>Chungyool Kim</dd>
+        <dt>University</dt><dd>California State University, Fullerton</dd>
+        <dt>Research interest</dt><dd>Corporate disclosure, executive incentives, AI</dd>
+        <dt>Teaching interest</dt><dd>Cost accounting, AI in the classroom</dd>
+        <dt>Contact</dt><dd><a href="mailto:chunkim@fullerton.edu">chunkim@fullerton.edu</a></dd>
+      </dl>
+    </aside>
+  </div>
+
+</section>
+
+<!-- ======================= RESEARCH ======================= -->
+<section class="block" id="research">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="item">Item 1 — Research</div>
+      <h2>Research</h2>
+    </div>
+
+    <div class="about-grid reveal" style="margin-bottom:48px">
+      <div></div>
+      <div class="body">
+        <p>My research examines how corporate disclosures are shaped by the incentives of the people who make them. Firms communicate through many channels — press conferences, 8-K filings, press releases, and increasingly social media — and I study how managers choose among them, what they choose to amplify, and what that means for investors and the quality of information in markets.</p>
+        <div class="chips">
+          <span class="chip">Voluntary disclosure</span><span class="chip">Executive incentives</span>
+          <span class="chip">Social media</span><span class="chip">Audit quality</span>
+          <span class="chip">Management guidance</span><span class="chip">ESG &amp; compensation</span>
+          <span class="chip">AI in research &amp; teaching</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="papers" id="papers"></div>
+  </div>
+</section>
+
+<!-- ======================= TEACHING ======================= -->
+<section class="block" id="teaching">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="item">Item 2 — Teaching</div>
+      <h2>Teaching</h2>
+      <p>Course widgets, practice exams, and syllabi, open to anyone, with no Canvas login needed.</p>
+    </div>
+
+    <div class="course reveal">
+      <div class="course-card">
+        <div class="code">ACCT 302 · UNDERGRADUATE · CORE</div>
+        <h3>Cost Accounting</h3>
+        <p>How organizations measure, assign, and manage costs — job and process costing, cost behavior, CVP analysis, budgeting, and the cost information managers use to make decisions.</p>
+        <div class="widgets-note">
+          <b>Course widgets</b>: the interactive tools we use in class, organized by chapter.<br><b>Practice exams</b>: randomized exams with fresh numbers every attempt and show/hide answers.<br>Both are open to everyone.
+        </div>
+        <div class="btns">
+          <a class="btn primary" id="widgetsBtn" href="#" data-goatcounter-click="course-widgets-card">Course widgets <span class="arr">→</span></a>
+          <a class="btn primary" id="examsBtn" href="#" data-goatcounter-click="practice-exams-card">Practice exams <span class="arr">→</span></a>
+          <a class="btn ghost" id="sylBtn" href="#">Current syllabus <span class="arr">→</span></a>
+        </div>
+      </div>
+      <div class="stats" id="stats"></div>
+    </div>
+
+    <div class="ledger-wrap reveal">
+      <div class="ledger-top">
+        <h4>Schedule of courses taught</h4>
+        <span class="hint">SOQ = Student Opinion Questionnaire rating, by section (out of 4.00)</span>
+      </div>
+      <table class="ledger" id="ledger">
+        <thead><tr><th>Term</th><th>Course</th><th class="num">Sections</th><th class="num">SOQ</th></tr></thead>
+        <tbody></tbody>
+        <tfoot></tfoot>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= CV ======================= -->
+<section class="block" id="cv">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="item">Item 3 — Curriculum Vitae</div>
+      <h2>Curriculum Vitae</h2>
+    </div>
+    <div class="cv reveal">
+      <div class="cv-card">
+        <span class="sync"><i></i>Linked live to Dropbox</span>
+        <h3>Always the current version.</h3>
+        <p>My CV is served directly from the file I maintain, so what you see here is never out of date.</p>
+        <div class="btns" style="margin-top:auto">
+          <a class="btn primary" id="cvOpen" data-goatcounter-click="cv-open" href="#" target="_blank" rel="noopener">Open CV <span class="arr">↗</span></a>
+          <button class="btn ghost" id="cvPreview" data-goatcounter-click="cv-preview" type="button" style="font:inherit;cursor:pointer;color:inherit">Preview here</button>
+        </div>
+      </div>
+      <div class="cv-frame" id="cvFrame">
+        <div class="ph"><div class="doc"></div>Click <b>Preview here</b> to view the CV on this page, or open it in a new tab.</div>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<!-- ======================= FOOTER ======================= -->
+<footer id="contact">
+  <div class="wrap">
+    <div>
+      <a class="flogo" href="https://www.fullerton.edu/" target="_blank" rel="noopener" aria-label="California State University, Fullerton">
+        <img class="logo-color" src="csuf-wordmark.png" alt="Cal State Fullerton">
+      </a>
+      <div class="sig">Chungyool Kim</div>
+      <p>Assistant Professor of Accounting<br>College of Business and Economics<br>California State University, Fullerton</p>
+    </div>
+    <div>
+      <h5>Contact</h5>
+      <a href="mailto:chunkim@fullerton.edu">chunkim@fullerton.edu</a>
+      <a href="https://www.linkedin.com/in/chungyool-chung-yool-kim-293942182" target="_blank" rel="noopener" data-goatcounter-click="linkedin">LinkedIn</a>
+      <!-- <p>Office: SGMH ____</p> -->
+      <!-- <p>Office hours: ____</p> -->
+    </div>
+    <div>
+      <h5>Elsewhere</h5>
+      <a href="https://business.fullerton.edu/academics/accountancy/faculty-profiles?user=chunkim%40Fullerton.edu" target="_blank" rel="noopener">CSUF faculty profile</a>
+      <a href="https://www.fullerton.edu/" target="_blank" rel="noopener">Cal State Fullerton</a>
+      <!-- <a href="https://scholar.google.com/...">Google Scholar</a> -->
+      <!-- <a href="https://papers.ssrn.com/...">SSRN</a> -->
+    </div>
+    <div class="fine"><span id="updated"></span><span>Privacy-friendly visit counts via GoatCounter — no cookies, no personal data · Hosted on GitHub Pages</span></div>
+  </div>
+</footer>
+
+<script>
+/* ==================================================================
+   ✏️  SITE CONTENT — this is the only part you need to edit.
+   ================================================================== */
+
+/* 1) CV: paste your Dropbox share link for the CV file here.
+      In Dropbox: right-click the file → Share → Copy link.
+      Keep the SAME file name and save over it when you update —
+      the link stays the same, so this page always shows the newest CV. */
+const CV_SHOW_PREVIEW = true;   // set to false to hide the "Preview here" button and panel
+const CV_DROPBOX_LINK = "https://www.dropbox.com/scl/fi/wn3yqd3cbb4uaf6h6bc6m/Chungyool_Kim_CV_Recent.docx?rlkey=3qtfb48mljwpaw0xuw3douig2&dl=0";
+
+/* 2) ACCT 302 pages (your CSUF-ACCT-302 repository). */
+const ACCT302_WIDGETS = "https://cckimm.github.io/CSUF-ACCT-302/widgets.html";        // course widgets
+const ACCT302_EXAMS   = "https://cckimm.github.io/CSUF-ACCT-302/practice_exam.html";  // practice exams
+
+/* 3) Visitor analytics (GoatCounter, free). After signing up at
+      goatcounter.com, put your site code here — e.g. if your dashboard is
+      https://ckim.goatcounter.com, the code is "ckim". Leave "" to disable. */
+const GOATCOUNTER_CODE = "";
+
+/* 4) Current syllabus for the Cost Accounting tile. Upload the PDF into the
+      "syllabi" folder and put its path here, e.g. "syllabi/ACCT302_syllabus.pdf".
+      Tip: reuse the same file name each semester and just replace the file. */
+const CURRENT_SYLLABUS = "syllabi/ACCT302_syllabus.pdf";
+
+/* 5) Terms taught — newest first. To add a term, copy one block.
+      soq:      list of section ratings ([] if not yet available).
+      current:  true for the term in progress.                    */
+const TERMS = [
+  { term:"Fall 2026",   course:"ACCT 302", sections:2, soq:[],          current:true },
+  { term:"Spring 2026", course:"ACCT 302", sections:2, soq:[3.71,3.48] },
+  { term:"Fall 2025",   course:"ACCT 302", sections:2, soq:[3.60,3.54] },
+  { term:"Spring 2025", course:"ACCT 302", sections:2, soq:[3.69,3.71] },
+  { term:"Fall 2024",   course:"ACCT 302", sections:2, soq:[3.47,3.68] },
+];
+
+/* 6) Papers — listed in the order below. Copy a block to add one.
+      status: "pub" (published), "rr" (revise & resubmit), "ur" (under review),
+              "prep" (preparing), "wip" (work in progress)
+      label:  the short tag shown, e.g. "Published · TAR", "R&R · TAR"
+      link:   optional URL (journal page, DOI, or SSRN) — shows a "Read the paper" link
+      details: optional extra text shown under "Details"                           */
+const PAPERS = [
+  { title:"Strategic Use of Executives' Social Media and Personal Equity Incentives",
+    authors:"Dissertation paper",
+    venue:"Revising for third round at The Accounting Review",
+    status:"rr", label:"R&R · TAR",
+    details:`<p>Examines whether executives use their personal social media to amplify firm financial news in ways linked to their personal equity incentives, using tweets from 242 executives at 230 firms (2009–2021).</p>
+             <p><b>Presented at:</b> University of Iowa (2023), Accounting PhD Rookie Camp (2023), KAAPA PhD Research Conference (2023), FARS 2024 Midyear Meeting.</p>
+             <p><b>Committee:</b> Dain Donelson (Co-Chair), Paul Hribar (Co-Chair), Cristi Gleason, Erik Lie, Adrienne Rhodes.</p>` },
+  { title:"Experienced Accounting-Employee Exits and Audit Quality",
+    authors:"with Farzana Afrin (CSU Fullerton)",
+    venue:"Under review at Managerial Auditing Journal",
+    status:"ur", label:"Under review" },
+  { title:"AI Talent in the Finance Function and Management Guidance Quality",
+    authors:"with Wonik Choi and Jongha Lim (CSU Fullerton)",
+    venue:"Preparing for submission",
+    status:"prep", label:"Preparing" },
+  { title:"Use of ESG Metrics in Executive Compensation",
+    authors:"with James Gong (CSU Fullerton)",
+    venue:"Work in progress — data analysis stage",
+    status:"wip", label:"In progress" },
+];
+
+/* ==================================================================
+   Rendering below — no need to edit.
+   ================================================================== */
+const $ = s => document.querySelector(s);
+const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const icon = {
+  doc:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="M14 3v6h6"/></svg>',
+  ext:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7M8 7h9v9"/></svg>'
+};
+const currentTerm = TERMS.find(t => t.current) || TERMS[0];
+
+/* papers */
+$("#papers").innerHTML = PAPERS.map((p,i)=>`
+  <article class="paper reveal">
+    <div class="meta"><span class="num">No. ${String(i+1).padStart(2,"0")}</span><span class="status ${p.status}">${esc(p.label)}</span></div>
+    <div>
+      <h3>${esc(p.title)}</h3>
+      <p class="authors">${esc(p.authors)}</p>
+      <p class="venue">${esc(p.venue)}</p>
+      ${p.link ? `<a class="plink" href="${esc(p.link)}" target="_blank" rel="noopener" data-goatcounter-click="paper-${i+1}">Read the paper ↗</a>` : ""}
+      ${p.details ? `<details><summary>Details</summary><div class="more">${p.details}</div></details>` : ""}
+    </div>
+  </article>`).join("");
+
+/* teaching */
+for(const [id,url] of [["#widgetsBtn",ACCT302_WIDGETS],["#examsBtn",ACCT302_EXAMS]]){ $(id).href=url; $(id).target="_blank"; $(id).rel="noopener"; }
+if(CURRENT_SYLLABUS){ $("#sylBtn").href=CURRENT_SYLLABUS; $("#sylBtn").target="_blank"; $("#sylBtn").dataset.goatcounterClick="syllabus-current"; }
+else { $("#sylBtn").innerHTML="Syllabus posting soon"; $("#sylBtn").setAttribute("aria-disabled","true"); }
+const allSoq = TERMS.flatMap(t=>t.soq);
+const avg = allSoq.reduce((a,b)=>a+b,0)/(allSoq.length||1);
+const termAvgs = TERMS.filter(t=>t.soq.length).map(t=>t.soq.reduce((a,b)=>a+b,0)/t.soq.length).reverse();
+const totalSections = TERMS.reduce((a,t)=>a+t.sections,0);
+
+function spark(vals){
+  if(vals.length<2) return "";
+  const w=260,h=48,p=6,min=Math.min(...vals)-.05,max=Math.max(...vals)+.05;
+  const pts=vals.map((v,i)=>[p+i*(w-2*p)/(vals.length-1), h-p-(v-min)/(max-min)*(h-2*p)]);
+  const d=pts.map((q,i)=>(i?"L":"M")+q[0].toFixed(1)+" "+q[1].toFixed(1)).join(" ");
+  return `<svg class="spark" viewBox="0 0 ${w} ${h}" role="img" aria-label="Average SOQ by term, oldest to newest">
+    <path d="${d}" fill="none" stroke="var(--orange)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+    ${pts.map(q=>`<circle cx="${q[0]}" cy="${q[1]}" r="3.2" fill="var(--card)" stroke="var(--orange)" stroke-width="2"/>`).join("")}</svg>`;
+}
+$("#stats").innerHTML = `
+  <div class="stat"><div class="v">${TERMS.length}</div><div class="l">Terms taught</div></div>
+  <div class="stat"><div class="v">${totalSections}</div><div class="l">Sections</div></div>
+  <div class="stat"><div class="v">${avg.toFixed(2)}<small>/4</small></div><div class="l">Avg. SOQ</div></div>
+  <div class="stat wide"><div><div class="l" style="margin:0 0 6px">SOQ trend by term</div><div style="font-size:14px;color:var(--ink-3)">Average of sections, ${esc(TERMS.filter(t=>t.soq.length).at(-1)?.term||"")} → ${esc(TERMS.find(t=>t.soq.length)?.term||"")}</div></div>${spark(termAvgs)}</div>`;
+
+const pill = (href,label,ico,track) => href
+  ? `<a class="link-pill" href="${esc(href)}"${/^https?:/.test(href)?' target="_blank" rel="noopener"':''}${track?` data-goatcounter-click="${esc(track)}"`:''}>${icon[ico]}${label}</a>`
+  : `<span class="link-pill off">Coming soon</span>`;
+$("#ledger tbody").innerHTML = TERMS.map(t=>`
+  <tr>
+    <td class="term">${esc(t.term)}${t.current?'<span class="now">Now</span>':''}</td>
+    <td data-label="Course">${esc(t.course)} · Cost Accounting</td>
+    <td class="num" data-label="Sections">${t.sections}</td>
+    <td class="num" data-label="SOQ">${t.soq.length ? t.soq.map(v=>v.toFixed(2)).join(" · ") : '<span style="color:var(--ink-3)">pending</span>'}</td>
+  </tr>`).join("");
+$("#ledger tfoot").innerHTML = `<tr><td class="term">Total / average</td><td data-label=""></td><td class="num" data-label="Sections"><span>${totalSections}</span></td><td class="num" data-label="Avg. SOQ"><span>${avg.toFixed(2)}</span></td></tr>`;
+
+/* CV from Dropbox */
+const cvSet = CV_DROPBOX_LINK && !CV_DROPBOX_LINK.startsWith("PASTE");
+const withParam = (u,k,v) => { try{ const x=new URL(u); ["dl","raw","st"].forEach(p=>x.searchParams.delete(p)); x.searchParams.set(k,v); return x.toString(); }catch(e){ return u; } };
+/* Microsoft's viewer can't follow Dropbox's download redirect, so give it the direct file host. */
+const directLink = u => { try{ const x=new URL(withParam(u,"dl","1")); if(x.hostname==="www.dropbox.com") x.hostname="dl.dropboxusercontent.com"; x.searchParams.delete("dl"); return x.toString(); }catch(e){ return u; } };
+const isPdf = /\.pdf(\?|$)/i.test(CV_DROPBOX_LINK);
+/* PDF: open/preview the file directly.
+   Word (.docx): open Dropbox's own viewer; preview inline via Microsoft's free Office viewer. */
+const cvOpenUrl    = isPdf ? withParam(CV_DROPBOX_LINK,"raw","1") : withParam(CV_DROPBOX_LINK,"dl","0");
+const cvPreviewUrl = isPdf ? withParam(CV_DROPBOX_LINK,"raw","1")
+  : "https://view.officeapps.live.com/op/embed.aspx?src=" + encodeURIComponent(directLink(CV_DROPBOX_LINK));
+if(!CV_SHOW_PREVIEW){ $("#cvPreview").remove(); $("#cvFrame").remove(); document.querySelector(".cv").style.gridTemplateColumns="1fr"; }
+if(cvSet){ $("#cvOpen").href = cvOpenUrl; }
+else { $("#cvOpen").setAttribute("aria-disabled","true"); }
+$("#cvPreview")?.addEventListener("click",()=>{
+  if(!cvSet){ $("#cvFrame").innerHTML='<div class="ph"><div class="doc"></div>CV link not set yet — add the Dropbox link at the top of the SITE CONTENT section.</div>'; return; }
+  $("#cvFrame").innerHTML = `<iframe title="Curriculum vitae" src="${esc(cvPreviewUrl)}" loading="lazy"></iframe>
+    <p style="position:absolute;bottom:8px;left:0;right:0;text-align:center;font-size:12.5px;color:var(--ink-3);margin:0;pointer-events:none">Not loading? Use <b>Open CV</b> above.</p>`;
+});
+
+/* footer date */
+const lm = new Date(document.lastModified);
+$("#updated").textContent = "Last updated " + (isNaN(lm) ? "" : lm.toLocaleDateString("en-US",{month:"long",year:"numeric"}));
+
+/* nav + theme */
+$("#menuBtn").addEventListener("click",e=>{const o=$("#menu").classList.toggle("open");e.currentTarget.setAttribute("aria-expanded",o)});
+document.querySelectorAll("#menu a").forEach(a=>a.addEventListener("click",()=>$("#menu").classList.remove("open")));
+const root=document.documentElement;
+try{ const s=localStorage.getItem("theme"); if(s) root.dataset.theme=s; }catch(e){}
+$("#themeBtn").addEventListener("click",()=>{
+  const dark = root.dataset.theme ? root.dataset.theme==="dark" : matchMedia("(prefers-color-scheme: dark)").matches;
+  root.dataset.theme = dark ? "light" : "dark";
+  try{ localStorage.setItem("theme",root.dataset.theme); }catch(e){}
+});
+
+/* analytics — loaded last so link clicks on rendered content are tracked */
+if(GOATCOUNTER_CODE){
+  const gc=document.createElement("script"); gc.async=true; gc.src="https://gc.zgo.at/count.js";
+  gc.dataset.goatcounter=`https://${GOATCOUNTER_CODE}.goatcounter.com/count`;
+  document.body.appendChild(gc);
+}
+
+/* reveal on scroll */
+const io = new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add("in");io.unobserve(e.target)}}),{threshold:.12});
+document.querySelectorAll(".reveal").forEach(el=>io.observe(el));
+</script>
+</body>
+</html>
